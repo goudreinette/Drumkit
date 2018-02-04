@@ -21,7 +21,7 @@
                 <Pane prefHeight="70.0" prefWidth="207.0" BorderPane.alignment="CENTER">
                     <children>
                         <Slider fx:id="bpmSlider" layoutX="38.0" layoutY="16.0" max="200.0" min="50.0" prefHeight="15.0"
-                                prefWidth="132.0" showTickMarks="true"/>
+                                prefWidth="132.0" showTickMarks="true" onMouseReleased="#bpmSliderChanged"/>
                     </children>
                 </Pane>
             </right>

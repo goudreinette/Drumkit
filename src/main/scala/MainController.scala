@@ -2,6 +2,7 @@ import javafx.beans.value.{ChangeListener, ObservableValue}
 
 import scalafx.event.ActionEvent
 import scalafx.scene.control.{Button, Label, Slider, ToggleButton}
+import scalafx.scene.input.MouseDragEvent
 import scalafxml.core.macros.sfxml
 
 
@@ -18,13 +19,14 @@ class MainController(play: ToggleButton,
         beatMeasureLabel.text = f"${model.currentBeat} ${model.currentMeasure}"
         bpmLabel.text = s"${model.beatsPerMinute}BPM"
         play.selected = model.playing
-        
-        bpmSlider.valueProperty.addListener((observable, oldValue, newValue) =>
-                                                model.beatsPerMinute = newValue.doubleValue())
     })
     
     /**
       * Event handlers
       */
-    def togglePlaying(e: ActionEvent) = model.togglePlaying
+    def togglePlaying(e: ActionEvent) =
+        model.togglePlaying
+    
+    def bpmSliderChanged(e: scalafx.event.Event) =
+        model.beatsPerMinute = bpmSlider.getValue
 }
