@@ -5,13 +5,7 @@ import scalafxml.core.macros.sfxml
 
 @sfxml
 class MainController(play: Button, model: Model) {
-    
-    model.updaters.append(model => {
+    model.onUpdate(model => {
         println(model)
     })
-    
-    
-    def onCreate(event: ActionEvent) {
-    
-    }
 }

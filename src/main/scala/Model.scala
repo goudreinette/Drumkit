@@ -18,6 +18,7 @@ class Model {
         callUpdaters
     }
     
+    def onUpdate(u: Model => Unit) = updaters.append(u)
     
     def callUpdaters = for {
         c <- updaters
