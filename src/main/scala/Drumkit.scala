@@ -1,3 +1,5 @@
+import kuusisto.tinysound.TinySound
+
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.scene.Scene
@@ -8,8 +10,12 @@ import scala.reflect.runtime.universe._
 object Drumkit extends JFXApp {
     val model = new Model
     
+    TinySound.init
+    
+    
     stage = new JFXApp.PrimaryStage() {
         title = "Drumkit"
+        onCloseRequest = _ => System.exit(0)
         scene = new Scene(
             FXMLView(getClass.getResource("layout.fxml"),
                      new DependenciesByType(Map(
