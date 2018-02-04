@@ -17,7 +17,7 @@ class MainController(play: ToggleButton,
     model.onUpdate(model => {
         secondsLabel.text = f"${model.totalSeconds}%2.2fs"
         beatMeasureLabel.text = f"${model.currentBeat} ${model.currentMeasure}"
-        bpmLabel.text = s"${model.beatsPerMinute}BPM"
+        bpmLabel.text = s"${model.beatsPerMinute.round}BPM"
         play.selected = model.playing
     })
     
