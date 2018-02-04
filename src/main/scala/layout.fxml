@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -11,48 +11,56 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.121"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainController">
+<BorderPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainController">
     <top>
-        <BorderPane fx:id="toolbar" prefHeight="70.0" prefWidth="1282.0"
-                    style="-fx-border-color: darkgrey; -fx-border-width: 0px 0px 1px 0px;" styleClass="toolbar"
-                    BorderPane.alignment="CENTER">
+        <BorderPane fx:id="toolbar" prefHeight="70.0" prefWidth="1282.0" style="-fx-border-color: darkgrey; -fx-border-width: 0px 0px 1px 0px;" styleClass="toolbar" BorderPane.alignment="CENTER">
             <right>
                 <Pane prefHeight="70.0" prefWidth="207.0" BorderPane.alignment="CENTER">
                     <children>
-                        <Slider fx:id="bpmSlider" layoutX="38.0" layoutY="17.0" prefHeight="15.0" prefWidth="132.0"/>
+                        <Slider fx:id="bpmSlider" layoutX="38.0" layoutY="17.0" prefHeight="15.0" prefWidth="132.0" />
                     </children>
                 </Pane>
             </right>
             <left>
                 <Pane prefHeight="70.0" prefWidth="145.0" BorderPane.alignment="CENTER">
                     <children>
-                        <Button onAction="#togglePlaying" fx:id="playButton" layoutX="14.0"
-                                mnemonicParsing="false"
-                                prefHeight="49.0" prefWidth="57.0" text="Play"/>
+                        <ToggleButton fx:id="play" layoutX="14.0" mnemonicParsing="false" onAction="#togglePlaying" prefHeight="49.0" prefWidth="111.0" text="Play" />
                     </children>
                 </Pane>
             </left>
             <center>
-                <GridPane style="-fx-background-color: #333;">
+                <GridPane hgap="20.0" style="-fx-background-color: #333;">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Label fx:id="secondsLabel" alignment="CENTER" prefHeight="49.0" prefWidth="73.0" text="Seconds"
-                               textAlignment="CENTER" textFill="WHITE">
+                        <Label fx:id="secondsLabel" alignment="CENTER" prefHeight="49.0" prefWidth="105.0" text="Seconds" textAlignment="CENTER" textFill="WHITE">
                             <font>
-                                <Font size="15.0"/>
+                                <Font size="15.0" />
                             </font>
+                     <padding>
+                        <Insets left="20.0" right="20.0" />
+                     </padding>
                         </Label>
+                  <Label fx:id="bpmLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="49.0" prefWidth="151.0" text="BPM" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <padding>
+                        <Insets left="20.0" right="20.0" />
+                     </padding>
+                  </Label>
                     </children>
                 </GridPane>
             </center>
             <padding>
-                <Insets bottom="10.0" top="10.0"/>
+                <Insets bottom="10.0" top="10.0" />
             </padding>
         </BorderPane>
     </top>

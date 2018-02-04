@@ -1,16 +1,18 @@
 import scalafx.event.ActionEvent
-import scalafx.scene.control.{Button, Label}
+import scalafx.scene.control.{Button, Label, ToggleButton}
 import scalafxml.core.macros.sfxml
 
 
 @sfxml
-class MainController(playButton: Button,
+class MainController(play: ToggleButton,
                      model: Model,
-                     secondsLabel: Label) {
+                     secondsLabel: Label,
+                     bpmLabel: Label) {
     
     model.onUpdate(model => {
         secondsLabel.text = f"${model.seconds}%2.2fs"
-        playButton.text = if (model.playing) "Playing..." else "Play"
+        bpmLabel.text = s"${model.bpm}BPM"
+        play.selected = model.playing
     })
     
     /**

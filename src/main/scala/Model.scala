@@ -1,7 +1,4 @@
 import scala.collection.mutable
-import scala.compat.Platform
-import scalafx.beans.property.{BooleanProperty, DoubleProperty, IntegerProperty}
-import scalafx.collections.ObservableBuffer
 
 
 class Model {
@@ -10,7 +7,11 @@ class Model {
       */
     @volatile
     var playing = false
+    
+    val beatsInMaat = 4;
+    
     var nanos = 0.0
+    
     var bpm = 120
     val samples = Array.ofDim[Sample](4, 4)
     var updaters = mutable.Buffer[Model => Unit]()
@@ -20,7 +21,17 @@ class Model {
     /**
       * Getters
       */
-    def seconds = nanos / 1000000000
+    def beats {
+    
+    }
+    
+    def seconds: Double = {
+        val s = nanos / 1000000000
+        return if (s > beatsInMaat)
+            s % 4
+        else
+            s
+    }
     
     /**
       * Actions
