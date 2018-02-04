@@ -8,23 +8,20 @@ class Model {
     var seconds = 0.0
     var bpm = 120
     val samples = Array.ofDim[Sample](4, 4)
-    var controllers = mutable.Buffer[Controller]()
+    var updaters = mutable.Buffer[Model => Unit]()
     
     def run = new Thread(() => {
-        while (true) {
-            tick
-        }
+        while (true) tick
     }).start()
     
     def tick {
-        updateControllers
+        callUpdaters
     }
     
-    def addController(c: Controller) = controllers += c
     
-    def updateControllers = for {
-        c: Controller <- controllers
-    } c.update
+    def callUpdaters = for {
+        c <- updaters
+    } c.apply(this)
 }
 
 case class Sample(name: String)
