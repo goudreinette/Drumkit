@@ -9,10 +9,12 @@ object Drumkit extends JFXApp {
     val model = new Model
     
     stage = new JFXApp.PrimaryStage() {
-        title = "Test window"
+        title = "Drumkit"
         scene = new Scene(
             FXMLView(getClass.getResource("layout.fxml"),
                      new DependenciesByType(Map(
                          typeOf[Model] -> model))))
     }
+    
+    model.run
 }

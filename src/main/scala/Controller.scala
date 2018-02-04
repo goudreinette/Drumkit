@@ -3,5 +3,8 @@ import scalafxml.core.macros.sfxml
 
 @sfxml
 class Controller(play: Button, model: Model) {
-
+    println(play)
+    
+    def update: Unit = {
+    }
 }

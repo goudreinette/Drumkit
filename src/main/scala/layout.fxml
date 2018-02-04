@@ -12,7 +12,7 @@
     <top>
         <ToolBar prefHeight="69.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
             <items>
-                <Button fx:id="Play" mnemonicParsing="false" prefHeight="49.0" prefWidth="57.0" text="Play"/>
+                <Button fx:id="play" mnemonicParsing="false" prefHeight="49.0" prefWidth="57.0" text="Play"/>
                 <FlowPane prefHeight="69.0" prefWidth="687.0" style="-fx-background-color: #aaa;"/>
                 <Slider/>
             </items>
