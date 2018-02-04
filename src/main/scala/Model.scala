@@ -29,12 +29,11 @@ class Model {
     def secondsIntoCurrentMeasure =
         totalSeconds % secondsInAMeasure
     
-    def currentMeasure =
-        totalSeconds / secondsInAMeasure
+    def currentMeasure: Int =
+        (totalSeconds / secondsInAMeasure).toInt
     
     def currentBeat: Int = {
-        val remainingSeconds = totalSeconds - secondsIntoCurrentMeasure
-        (remainingSeconds / secondsInABeat).toInt
+        (totalSeconds / secondsInABeat).toInt
     }
     
     def secondsIntoCurrentBeat: Double =
@@ -93,7 +92,7 @@ class Model {
     def playSounds = {
         if (lastPlayedBeat != currentBeat) {
             Audio.playFile("kick.wav")
-            lastPlayedBeat = currentBeat.toInt
+            lastPlayedBeat = currentBeat
         }
     }
 }
