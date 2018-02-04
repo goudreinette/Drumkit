@@ -8,6 +8,7 @@ class Model {
     /**
       * Fields
       */
+    @volatile
     var playing = false
     var nanos = 0.0
     var bpm = 120
@@ -22,6 +23,13 @@ class Model {
     def seconds = nanos / 1000000000
     
     /**
+      * Actions
+      */
+    def togglePlaying = {
+        playing = !playing
+    }
+    
+    /**
       * Main
       */
     def run = new Thread(() => {
@@ -34,6 +42,8 @@ class Model {
                 lastTime = newTime
                 println(nanos)
                 Thread.sleep(tickPause)
+            } else {
+                lastTime = System.nanoTime()
             }
         }
     }).start()
