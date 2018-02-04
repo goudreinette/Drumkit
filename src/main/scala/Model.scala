@@ -19,6 +19,8 @@ class Model {
     val tickPause = 1
     
     var lastPlayedBeat: Int = 0
+    var lastPlayedMeasure: Int = 0
+    
     
     /**
       * Getters
@@ -86,6 +88,7 @@ class Model {
         c <- updaters
     } javafx.application.Platform.runLater(() => c.apply(this))
     
+    
     /**
       * Audio
       */
@@ -93,6 +96,10 @@ class Model {
         if (lastPlayedBeat != currentBeat) {
             lastPlayedBeat = currentBeat
             Audio.kick.play
+        }
+        if (lastPlayedMeasure != currentMeasure) {
+            lastPlayedMeasure = currentMeasure
+            Audio.cowbell.play
         }
     }
 }
