@@ -1,5 +1,5 @@
 import scalafx.event.ActionEvent
-import scalafx.scene.control.{Button, Label, ToggleButton}
+import scalafx.scene.control.{Button, Label, Slider, ToggleButton}
 import scalafxml.core.macros.sfxml
 
 
@@ -7,11 +7,14 @@ import scalafxml.core.macros.sfxml
 class MainController(play: ToggleButton,
                      model: Model,
                      secondsLabel: Label,
-                     bpmLabel: Label) {
+                     beatMeasureLabel: Label,
+                     bpmLabel: Label,
+                     bpmSlider: Slider) {
     
     model.onUpdate(model => {
-        secondsLabel.text = f"${model.seconds}%2.2fs"
-        bpmLabel.text = s"${model.bpm}BPM"
+        secondsLabel.text = f"${model.totalSeconds}%2.2fs"
+        beatMeasureLabel.text = f"${model.currentBeat}"
+        bpmLabel.text = s"${model.beatsPerMinute}BPM"
         play.selected = model.playing
     })
     
