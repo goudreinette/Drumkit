@@ -11,7 +11,7 @@ project/boot/
 project/plugins/project/
 .history
 .cache
-.lib/
+lib/
 ### Scala template
 *.class
 project/target/

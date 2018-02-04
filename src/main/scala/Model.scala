@@ -91,8 +91,8 @@ class Model {
       */
     def playSounds = {
         if (lastPlayedBeat != currentBeat) {
-            Audio.playFile("kick.wav")
             lastPlayedBeat = currentBeat
+            Audio.kick.play
         }
     }
 }
