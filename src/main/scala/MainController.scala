@@ -54,10 +54,10 @@ class MainController(model: Model,
       */
     def updatePads = model.forEachPad((column, row, pad) => {
         pad.activateAt.map(beat => {
-            val highlighted = (beat >= model.beatsIntoCurrentMeasure && beat < model.beatsIntoCurrentMeasure + 0.3)
-            padButtons(column)(row).defaultButton = highlighted
+            val highlighted = beat >= model.beatsIntoCurrentMeasure && beat < model.beatsIntoCurrentMeasure + 0.3
+            if (highlighted) padButtons(column)(row).getStyleClass().add("highlight")
+            else padButtons(column)(row).getStyleClass().removeAll("highlight")
         })
-        
     })
     
     

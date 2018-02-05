@@ -66,12 +66,16 @@ class Model {
         playing = !playing
     
     def addActivation(column: Int, row: Int) = {
-        pads(column)(row).activateAtBeat(quantizedBeatsIntoCurrentMeasure)
+        pads(column)(row).activateAtBeat(quantize(beatsIntoCurrentMeasure, 8))
         println(pads(row)(column), pads(row)(column).activateAt)
     }
     
-    def quantizedBeatsIntoCurrentMeasure =
-        (beatsIntoCurrentMeasure * 32).round / 32
+    
+    def quantize(x: Double, y: Int) = {
+        val multiplied = (x * y).toInt
+        val floored = multiplied.toDouble / y.toDouble
+        floored
+    }
     
     
     /**
