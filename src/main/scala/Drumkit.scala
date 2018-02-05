@@ -14,7 +14,7 @@ object Drumkit extends JFXApp {
     
     stage = new JFXApp.PrimaryStage() {
         title = "Drumkit"
-        onCloseRequest = _ => System.exit(0)
+        onCloseRequest = _ => exit
         scene = new Scene(
             FXMLView(getClass.getResource("layout.fxml"),
                      new DependenciesByType(Map(
@@ -22,4 +22,9 @@ object Drumkit extends JFXApp {
     }
     
     model.run
+    
+    def exit {
+        System.exit(0)
+        TinySound.shutdown()
+    }
 }
