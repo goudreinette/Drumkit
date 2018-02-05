@@ -66,9 +66,12 @@ class Model {
         playing = !playing
     
     def addActivation(column: Int, row: Int) = {
-        pads(column)(row).activateAtBeat(beatsIntoCurrentMeasure)
+        pads(column)(row).activateAtBeat(quantizedBeatsIntoCurrentMeasure)
         println(pads(row)(column), pads(row)(column).activateAt)
     }
+    
+    def quantizedBeatsIntoCurrentMeasure =
+        (beatsIntoCurrentMeasure * 10).toInt./(10).toDouble
     
     
     /**
@@ -120,7 +123,7 @@ class Model {
             pad.tryPlaying(currentWholeMeasure, beatsIntoCurrentMeasure)
         })
         
-//        if (lastPlayedWholeMeasure != currentWholeMeasure) {
+        //        if (lastPlayedWholeMeasure != currentWholeMeasure) {
         //            lastPlayedWholeMeasure = currentWholeMeasure
         //            Audio.cowbell.play
         //        }
