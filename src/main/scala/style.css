@@ -1,3 +1,7 @@
 Label {
     -fx-text-fill: white !important;
 }
+
+GridPane Button {
+    -fx-max-width: MAX_;
+}
