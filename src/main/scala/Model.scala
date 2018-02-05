@@ -1,4 +1,7 @@
+import java.io.File
+
 import scala.collection.{immutable, mutable}
+import com.github.tototoshi.csv._
 
 
 class Model {
@@ -13,7 +16,7 @@ class Model {
     var nanos = 0.0
     
     var beatsPerMinute = 120.0
-    val pads = makePads
+    val pads = if (SampleStorage.file.exists) SampleStorage.loadPads() else makePads
     val updaters = mutable.Buffer[Model => Unit]()
     
     val tickPause = 1
@@ -25,8 +28,8 @@ class Model {
       * Pads
       */
     def makePads: IndexedSeq[IndexedSeq[Pad]] = {
-        val kicks = for {c <- 0 until 2} yield for {r <- 0 until 4} yield Pad("kick.wav")
-        val snares = for {c <- 2 until 4} yield for {r <- 0 until 4} yield Pad("snare.wav")
+        val kicks = for {c <- 0 until 2} yield for {r <- 0 until 4} yield Pad("samples/kick.wav")
+        val snares = for {c <- 2 until 4} yield for {r <- 0 until 4} yield Pad("samples/snare.wav")
         kicks ++ snares
     }
     

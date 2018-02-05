@@ -24,7 +24,8 @@ object Drumkit extends JFXApp {
     model.run
     
     def exit {
-        System.exit(0)
         TinySound.shutdown()
+        SampleStorage.save(model.pads)
+        System.exit(0)
     }
 }
