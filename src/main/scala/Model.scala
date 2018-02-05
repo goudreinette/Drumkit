@@ -16,7 +16,7 @@ class Model {
     var nanos = 0.0
     
     var beatsPerMinute = 120.0
-    val pads = if (SampleStorage.file.exists) SampleStorage.loadPads() else makePads
+    val pads = PadStorage.loadPads
     val updaters = mutable.Buffer[Model => Unit]()
     
     val tickPause = 1
@@ -24,14 +24,6 @@ class Model {
     var lastPlayedWholeBeat: Int = 0
     var lastPlayedWholeMeasure: Int = 0
     
-    /**
-      * Pads
-      */
-    def makePads: IndexedSeq[IndexedSeq[Pad]] = {
-        val kicks = for {c <- 0 until 2} yield for {r <- 0 until 4} yield Pad("samples/kick.wav")
-        val snares = for {c <- 2 until 4} yield for {r <- 0 until 4} yield Pad("samples/snare.wav")
-        kicks ++ snares
-    }
     
     /**
       * Total
