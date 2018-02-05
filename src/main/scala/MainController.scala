@@ -37,6 +37,7 @@ class MainController(model: Model,
             padsGrid.add(new Button {
                 maxWidth = Double.MaxValue
                 maxHeight = Double.MaxValue
+                onMouseClicked = (_: Event) => model.addActivation(row, column)
             }, row, column)
     
     

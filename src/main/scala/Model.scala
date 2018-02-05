@@ -65,7 +65,8 @@ class Model {
     def togglePlaying =
         playing = !playing
     
-    def addActivation = null
+    def addActivation(row: Int, column: Int) =
+        println(row, column)
     
     
     /**
