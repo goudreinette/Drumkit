@@ -8,10 +8,9 @@ import scala.reflect.runtime.universe._
 
 
 object Drumkit extends JFXApp {
-    val model = new Model
-    
     TinySound.init
     
+    val model = new Model
     
     stage = new JFXApp.PrimaryStage() {
         title = "Drumkit"

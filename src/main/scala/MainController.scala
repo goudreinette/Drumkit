@@ -1,8 +1,6 @@
-import javafx.beans.value.{ChangeListener, ObservableValue}
-
-import scalafx.event.ActionEvent
+import scalafx.Includes._
+import scalafx.event.{ActionEvent, Event}
 import scalafx.scene.control._
-import scalafx.scene.input.MouseDragEvent
 import scalafx.scene.layout.GridPane
 import scalafxml.core.macros.sfxml
 
@@ -33,12 +31,12 @@ class MainController(model: Model,
       * Init
       */
     def initializePads =
-        for {row <- 0 until 4; column <- 0 until 4}
+        for {column <- 0 until 4; row <- 0 until 4}
             padsGrid.add(new Button {
                 maxWidth = Double.MaxValue
                 maxHeight = Double.MaxValue
-                onMouseClicked = (_: Event) => model.addActivation(row, column)
-            }, row, column)
+                onMouseClicked = (_: Event) => model.addActivation(column, row)
+            }, column, row)
     
     
     def initializeSlider =

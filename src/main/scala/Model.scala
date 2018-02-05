@@ -13,7 +13,7 @@ class Model {
     var nanos = 0.0
     
     var beatsPerMinute = 120.0
-    val pads = Array.ofDim[Pad](4, 4)
+    val pads = for {c <- 0 until 4} yield for {r <- 0 until 4} yield Pad("kick.wav")
     val updaters = mutable.Buffer[Model => Unit]()
     
     val tickPause = 1
@@ -65,8 +65,10 @@ class Model {
     def togglePlaying =
         playing = !playing
     
-    def addActivation(row: Int, column: Int) =
-        println(row, column)
+    def addActivation(column: Int, row: Int) = {
+        pads(column)(row).activateAtBeat(beatsIntoCurrentMeasure)
+        println(pads(row)(column), pads(row)(column).activateAt)
+    }
     
     
     /**
@@ -104,10 +106,12 @@ class Model {
       * Audio
       */
     def playSounds = {
-        if (lastPlayedWholeBeat != currentWholeBeat) {
-            lastPlayedWholeBeat = currentWholeBeat
-            Audio.kick.play
+        for {c <- 0 until 4
+             r <- 0 until 4} {
+            pads(c)(r).tryPlaying(currentWholeBeat, beatsIntoCurrentMeasure)
         }
+        
+        
         if (lastPlayedWholeMeasure != currentWholeMeasure) {
             lastPlayedWholeMeasure = currentWholeMeasure
             Audio.cowbell.play
