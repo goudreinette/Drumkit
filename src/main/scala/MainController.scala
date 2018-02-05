@@ -41,7 +41,11 @@ class MainController(model: Model,
         val padButton = new Button {
             maxWidth = Double.MaxValue
             maxHeight = Double.MaxValue
-            onMouseClicked = (_: Event) => model.addActivation(column, row)
+            text = pad.sampleName
+            onMousePressed = (_: Event) => {
+                model.addActivation(column, row);
+                pad.sample.play()
+            }
             onDragOver = (event: DragEvent) => {
                 val db = event.getDragboard
                 if (db.hasFiles) event.acceptTransferModes(TransferMode.Copy)
@@ -75,7 +79,7 @@ class MainController(model: Model,
         pad.activateAt.map(beat => {
             val highlighted = beat >= model.beatsIntoCurrentMeasure - 0.1 && beat < model.beatsIntoCurrentMeasure + 1
             val padButton = padButtons(column)(row)
-            padButton.text = pad.samplePath
+            padButton.text = pad.sampleName
             if (highlighted) padButton.getStyleClass().add("highlight")
             else padButton.getStyleClass().removeAll("highlight")
         })
