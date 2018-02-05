@@ -71,7 +71,7 @@ class Model {
     }
     
     def quantizedBeatsIntoCurrentMeasure =
-        (beatsIntoCurrentMeasure * 10).toInt./(10).toDouble
+        (beatsIntoCurrentMeasure * 32).round / 32
     
     
     /**
