@@ -107,9 +107,10 @@ class Model {
     /**
       * Pads
       */
-    def forEachPad(f: (Int, Int, Pad) => Unit) =
-        for {c <- 0 until 4; r <- 0 until 4}
-            f(c, r, pads(c)(r))
+    def forEachPad[A](f: (Int, Int, Pad) => A): IndexedSeq[IndexedSeq[A]] =
+        for {c <- 0 until 4} yield
+            for {r <- 0 until 4} yield
+                f(c, r, pads(c)(r))
     
     /**
       * Audio
@@ -119,9 +120,9 @@ class Model {
             pad.tryPlaying(currentWholeMeasure, beatsIntoCurrentMeasure)
         })
         
-        if (lastPlayedWholeMeasure != currentWholeMeasure) {
-            lastPlayedWholeMeasure = currentWholeMeasure
-            Audio.cowbell.play
-        }
+//        if (lastPlayedWholeMeasure != currentWholeMeasure) {
+        //            lastPlayedWholeMeasure = currentWholeMeasure
+        //            Audio.cowbell.play
+        //        }
     }
 }

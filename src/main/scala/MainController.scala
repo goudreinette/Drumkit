@@ -1,7 +1,9 @@
+import scala.collection.mutable
 import scalafx.Includes._
 import scalafx.event.{ActionEvent, Event}
 import scalafx.scene.control._
-import scalafx.scene.layout.GridPane
+import scalafx.scene.layout.{Background, GridPane}
+import scalafx.scene.paint.Color._
 import scalafxml.core.macros.sfxml
 
 
@@ -15,7 +17,7 @@ class MainController(model: Model,
                      progress: ProgressBar,
                      padsGrid: GridPane) {
     
-    initializePads
+    var padButtons = initializePads
     initializeSlider
     
     model.onUpdate(model => {
@@ -24,19 +26,24 @@ class MainController(model: Model,
         bpmLabel.text = s"${model.beatsPerMinute.round}BPM"
         play.selected = model.playing
         progress.progress = (model.beatsIntoCurrentMeasure / model.beatsInAMeasure)
+        
+        updatePads
     })
-
+    
     
     /**
       * Init
       */
-    def initializePads =
-        for {column <- 0 until 4; row <- 0 until 4}
-            padsGrid.add(new Button {
-                maxWidth = Double.MaxValue
-                maxHeight = Double.MaxValue
-                onMouseClicked = (_: Event) => model.addActivation(column, row)
-            }, column, row)
+    def initializePads = model.forEachPad((column, row, _) => {
+        val padButton = new Button {
+            maxWidth = Double.MaxValue
+            maxHeight = Double.MaxValue
+            onMouseClicked = (_: Event) => model.addActivation(column, row)
+        }
+        padsGrid.add(padButton, column, row)
+        padButton
+    })
+    
     
     def initializeSlider =
         bpmSlider.value = model.beatsPerMinute
@@ -45,7 +52,15 @@ class MainController(model: Model,
     /**
       * Update
       */
-    def updatePads =
+    def updatePads = model.forEachPad((column, row, pad) => {
+        pad.activateAt.map(beat => {
+            if (beat > model.beatsIntoCurrentMeasure && beat < model.beatsIntoCurrentMeasure + 1)
+                padButtons(column)(row).setStyle("-fx-background: blue")
+            else
+                padButtons(column)(row).setStyle("-fx-background: red")
+        })
+        
+    })
     
     
     /**
