@@ -18,28 +18,36 @@ class Model {
     
     val tickPause = 1
     
-    var lastPlayedBeat: Int = 0
-    var lastPlayedMeasure: Int = 0
+    var lastPlayedWholeBeat: Int = 0
+    var lastPlayedWholeMeasure: Int = 0
     
     
     /**
-      * Getters
+      * Total
       */
     def totalSeconds =
         nanos / 1000000000
     
-    def secondsIntoCurrentMeasure =
-        totalSeconds % secondsInAMeasure
-    
-    def currentMeasure: Int =
+    def currentWholeMeasure: Int =
         (totalSeconds / secondsInAMeasure).toInt
     
-    def currentBeat: Int = {
-        (totalSeconds / secondsInABeat).toInt
-    }
+    def currentBeat: Double =
+        totalSeconds / secondsInABeat
     
+    def currentWholeBeat =
+        currentBeat.toInt
+    
+    /**
+      * Relative
+      */
     def secondsIntoCurrentBeat: Double =
         secondsIntoCurrentMeasure % secondsInABeat
+    
+    def beatsIntoCurrentMeasure =
+        currentBeat % beatsInAMeasure
+    
+    def secondsIntoCurrentMeasure =
+        totalSeconds % secondsInAMeasure
     
     /**
       * Conversions
@@ -93,12 +101,12 @@ class Model {
       * Audio
       */
     def playSounds = {
-        if (lastPlayedBeat != currentBeat) {
-            lastPlayedBeat = currentBeat
+        if (lastPlayedWholeBeat != currentWholeBeat) {
+            lastPlayedWholeBeat = currentWholeBeat
             Audio.kick.play
         }
-        if (lastPlayedMeasure != currentMeasure) {
-            lastPlayedMeasure = currentMeasure
+        if (lastPlayedWholeMeasure != currentWholeMeasure) {
+            lastPlayedWholeMeasure = currentWholeMeasure
             Audio.cowbell.play
         }
     }
