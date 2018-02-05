@@ -108,7 +108,7 @@ class Model {
     def playSounds = {
         for {c <- 0 until 4
              r <- 0 until 4} {
-            pads(c)(r).tryPlaying(currentWholeBeat, beatsIntoCurrentMeasure)
+            pads(c)(r).tryPlaying(currentWholeMeasure, beatsIntoCurrentMeasure)
         }
         
         

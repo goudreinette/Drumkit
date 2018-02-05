@@ -10,11 +10,11 @@ case class Pad(samplePath: String) {
     def activateAtBeat(beat: Double) =
         activateAt = Some(beat)
     
-    def tryPlaying(currentMeasure: Int, beatsIntoCurrentMeasure: Double) {
+    def tryPlaying(currentWholeMeasure: Int, beatsIntoCurrentMeasure: Double) {
         activateAt.map(beat => {
-            if (lastPlayedMeasure != currentMeasure &&
+            if (lastPlayedMeasure != currentWholeMeasure &&
                 beatsIntoCurrentMeasure >= beat) {
-                lastPlayedWholeBeat = currentWholeBeat
+                lastPlayedMeasure = currentWholeMeasure
                 sample.play
             }
         })
