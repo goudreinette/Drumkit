@@ -10,16 +10,16 @@ class Model {
       */
     @volatile
     var playing = false
+    var nanos = 0.0
+    val tickPause = 1
     
     val beatsInAMeasure = 4;
-    
-    var nanos = 0.0
-    
     var beatsPerMinute = 120.0
+    
+    val quantizeBy = 4
+    
     val pads = PadStorage.loadPads
     val updaters = mutable.Buffer[Model => Unit]()
-    
-    val tickPause = 1
     
     var lastPlayedWholeBeat: Int = 0
     var lastPlayedWholeMeasure: Int = 0
@@ -69,14 +69,14 @@ class Model {
         playing = !playing
     
     def addActivation(column: Int, row: Int) = {
-        pads(column)(row).activateAtBeat(quantize(beatsIntoCurrentMeasure, 4))
+        pads(column)(row).activateAtBeat(quantize(beatsIntoCurrentMeasure))
         println(pads(row)(column), pads(row)(column).activateAt)
     }
     
     
-    def quantize(x: Double, y: Int) = {
-        val multiplied = (x * y).toInt
-        val floored = multiplied.toDouble / y.toDouble
+    def quantize(beats: Double) = {
+        val multiplied = (beats * quantizeBy).toInt
+        val floored = multiplied.toDouble / quantizeBy.toDouble
         floored
     }
     
