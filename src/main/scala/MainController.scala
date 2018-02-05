@@ -25,7 +25,7 @@ class MainController(model: Model,
         play.selected = model.playing
         progress.progress = (model.beatsIntoCurrentMeasure / model.beatsInAMeasure)
     })
-    
+
     
     /**
       * Init
@@ -38,9 +38,15 @@ class MainController(model: Model,
                 onMouseClicked = (_: Event) => model.addActivation(column, row)
             }, column, row)
     
-    
     def initializeSlider =
         bpmSlider.value = model.beatsPerMinute
+    
+    
+    /**
+      * Update
+      */
+    def updatePads =
+    
     
     /**
       * Event handlers

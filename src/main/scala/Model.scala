@@ -95,22 +95,29 @@ class Model {
         playSounds
     }
     
+    /**
+      * Callbacks
+      */
     def onUpdate(u: Model => Unit) = updaters.append(u)
     
     def callUpdaters = for {
         c <- updaters
     } javafx.application.Platform.runLater(() => c.apply(this))
     
+    /**
+      * Pads
+      */
+    def forEachPad(f: (Int, Int, Pad) => Unit) =
+        for {c <- 0 until 4; r <- 0 until 4}
+            f(c, r, pads(c)(r))
     
     /**
       * Audio
       */
     def playSounds = {
-        for {c <- 0 until 4
-             r <- 0 until 4} {
-            pads(c)(r).tryPlaying(currentWholeMeasure, beatsIntoCurrentMeasure)
-        }
-        
+        forEachPad((c, r, pad) => {
+            pad.tryPlaying(currentWholeMeasure, beatsIntoCurrentMeasure)
+        })
         
         if (lastPlayedWholeMeasure != currentWholeMeasure) {
             lastPlayedWholeMeasure = currentWholeMeasure
