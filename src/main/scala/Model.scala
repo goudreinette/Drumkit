@@ -66,7 +66,7 @@ class Model {
         playing = !playing
     
     def addActivation(column: Int, row: Int) = {
-        pads(column)(row).activateAtBeat(quantize(beatsIntoCurrentMeasure, 8))
+        pads(column)(row).activateAtBeat(quantize(beatsIntoCurrentMeasure, 4))
         println(pads(row)(column), pads(row)(column).activateAt)
     }
     
