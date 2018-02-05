@@ -76,7 +76,7 @@
               </BorderPane>
          </center>
          <top>
-            <ProgressBar fx:id="progress" prefHeight="0.0" prefWidth="1000.0" progress="0.0" BorderPane.alignment="CENTER" />
+            <ProgressBar fx:id="progress" maxHeight="10.0" prefHeight="0.0" prefWidth="1000.0" progress="0.0" BorderPane.alignment="CENTER" />
          </top>
       </BorderPane>
     </top>

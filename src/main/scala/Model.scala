@@ -13,8 +13,8 @@ class Model {
     var nanos = 0.0
     
     var beatsPerMinute = 120.0
-    val samples = Array.ofDim[Sample](4, 4)
-    var updaters = mutable.Buffer[Model => Unit]()
+    val pads = Array.ofDim[Pad](4, 4)
+    val updaters = mutable.Buffer[Model => Unit]()
     
     val tickPause = 1
     
@@ -65,6 +65,8 @@ class Model {
     def togglePlaying =
         playing = !playing
     
+    def addActivation = null
+    
     
     /**
       * Main
@@ -74,7 +76,7 @@ class Model {
         while (true) {
             if (playing) {
                 tick
-                var newTime = System.nanoTime()
+                val newTime = System.nanoTime()
                 nanos += (newTime - lastTime)
                 lastTime = newTime
                 //                println(nanos)
@@ -111,6 +113,3 @@ class Model {
         }
     }
 }
-
-
-case class Sample(name: String)
