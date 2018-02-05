@@ -18,7 +18,7 @@ class Model {
     
     val quantizeBy = 4
     
-    val pads = PadStorage.loadPads
+    val pads = PadRepository.loadPads
     val updaters = mutable.Buffer[Model => Unit]()
     
     var lastPlayedWholeBeat: Int = 0
