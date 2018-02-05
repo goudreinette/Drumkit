@@ -13,6 +13,7 @@ import scala.collection.JavaConversions._
 @sfxml
 class MainController(model: Model,
                      play: ToggleButton,
+                     record: ToggleButton,
                      secondsLabel: Label,
                      beatMeasureLabel: Label,
                      bpmLabel: Label,
@@ -43,7 +44,8 @@ class MainController(model: Model,
             maxHeight = Double.MaxValue
             text = pad.sampleName
             onMousePressed = (_: Event) => {
-                model.addActivation(column, row);
+                if (model.recording)
+                    model.addActivation(column, row);
                 pad.sample.play()
             }
             onDragOver = (event: DragEvent) => {
@@ -91,6 +93,9 @@ class MainController(model: Model,
       */
     def togglePlaying(e: ActionEvent) =
         model.togglePlaying
+
+    def toggleRecording(e: ActionEvent) =
+        model.toggleRecording
     
     def bpmSliderChanged(e: Event) =
         model.beatsPerMinute = bpmSlider.getValue

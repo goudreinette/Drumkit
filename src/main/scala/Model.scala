@@ -5,11 +5,14 @@ import com.github.tototoshi.csv._
 
 
 class Model {
+    
     /**
       * Fields
       */
     @volatile
     var playing = false
+    var recording = false
+    
     var nanos = 0.0
     val tickPause = 1
     
@@ -31,14 +34,15 @@ class Model {
     def totalSeconds =
         nanos / 1000000000
     
-    def currentWholeMeasure: Int =
-        (totalSeconds / secondsInAMeasure).toInt
-    
     def currentBeat: Double =
         totalSeconds / secondsInABeat
     
     def currentWholeBeat =
         currentBeat.toInt
+    
+    def currentWholeMeasure: Int =
+        (totalSeconds / secondsInAMeasure).toInt
+    
     
     /**
       * Relative
@@ -61,6 +65,14 @@ class Model {
     def secondsInAMeasure =
         secondsInABeat * beatsInAMeasure
     
+    /**
+      * Rounding
+      */
+    def quantize(beats: Double) = {
+        val multiplied = (beats * quantizeBy).toInt
+        val floored = multiplied.toDouble / quantizeBy.toDouble
+        floored
+    }
     
     /**
       * Actions
@@ -68,16 +80,13 @@ class Model {
     def togglePlaying =
         playing = !playing
     
+    def toggleRecording =
+        recording = !recording
+    
+    
     def addActivation(column: Int, row: Int) = {
         pads(column)(row).activateAtBeat(quantize(beatsIntoCurrentMeasure))
         println(pads(row)(column), pads(row)(column).activateAt)
-    }
-    
-    
-    def quantize(beats: Double) = {
-        val multiplied = (beats * quantizeBy).toInt
-        val floored = multiplied.toDouble / quantizeBy.toDouble
-        floored
     }
     
     
