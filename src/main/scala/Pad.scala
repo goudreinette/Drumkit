@@ -1,6 +1,9 @@
 import java.io.File
 
 import kuusisto.tinysound.TinySound
+import org.apache.commons.io.{FileUtils, FilenameUtils}
+
+import scala.reflect.io.Path
 
 
 case class Pad(var samplePath: String) {
@@ -9,6 +12,8 @@ case class Pad(var samplePath: String) {
     
     var lastPlayedMeasure = 0
     
+    def sampleName =
+        FilenameUtils.getBaseName(samplePath)
     
     def activateAtBeat(beat: Double) =
         activateAt = Some(beat)
