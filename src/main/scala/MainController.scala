@@ -24,6 +24,15 @@ class MainController(model: Model,
         progress.progress = (model.beatsIntoCurrentMeasure / model.beatsInAMeasure)
     })
     
+    initializePads
+    
+    /**
+      * Init
+      */
+    def initializePads =
+        for {pad <- model.pads}
+            d
+    
     /**
       * Event handlers
       */
