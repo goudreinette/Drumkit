@@ -38,7 +38,8 @@ class PadController(model: Model, padsGrid: GridPane) {
                     case _ => {
                         if (model.recording)
                             model.addActivation(column, row);
-                        pad.sample.play()
+                        pad.sample.setToLoopStart()
+                        pad.sample.start()
                     }
 
                 }
@@ -63,14 +64,22 @@ class PadController(model: Model, padsGrid: GridPane) {
       * Update
       */
     def updatePads = model.forEachPad((column, row, pad) => {
+        val padButton = padButtons(column)(row)
+
+        if (pad.activations.isEmpty)
+            removeHighlight(padButton)
+
         pad.activations.map({ case Activation(beat, _) => {
             val beatsIntoCurrentMeasure = model.beatsIntoCurrentMeasure
             val highlighted = beat <= beatsIntoCurrentMeasure + 0.2
-            val padButton = padButtons(column)(row)
             padButton.text = pad.sampleName
-            if (highlighted) padButton.getStyleClass().add("highlight")
-            else padButton.getStyleClass().removeAll("highlight")
+            if (highlighted) addHighlight(padButton)
+            else removeHighlight(padButton)
         }
         })
     })
+
+    def addHighlight(padButton: Button) = padButton.getStyleClass().add("highlight")
+
+    def removeHighlight(padButton: Button) = padButton.getStyleClass().removeAll("highlight")
 }

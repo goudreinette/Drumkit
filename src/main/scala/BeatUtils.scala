@@ -6,6 +6,10 @@ object BeatUtils {
     def quantize(beats: Double, quantizeBy: Int) = {
         val multiplied = (beats * quantizeBy).round
         val floored = multiplied.toDouble / quantizeBy.toDouble
-        floored
+
+        if (floored == 4.0) // FIXME
+            0.0
+        else
+            floored
     }
 }

@@ -8,7 +8,6 @@ addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.fu
 addSbtPlugin("com.artima.supersafe" % "sbtplugin" % "1.1.3")
 
 resolvers += "Artima Maven Repository" at "http://repo.artima.com/releases"
-resolvers += "mziccard" at "maven"
 
 
 libraryDependencies += "org.scalafx" %% "scalafx" % "8.0.144-R12"
@@ -20,4 +19,8 @@ libraryDependencies += "commons-io" % "commons-io" % "2.5"
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.4"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.4" % "test"
 
-libraryDependencies += "de.sciss" %% "scalaaudiofile" % "1.4.6"
+//libraryDependencies += "com.github.samgwise" %% "beads" % "1.01-SNAPSHOT"
+
+
+
+
