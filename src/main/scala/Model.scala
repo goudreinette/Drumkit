@@ -14,12 +14,12 @@ class Model {
     var recording = false
     
     var nanos = 0.0
-    val tickPause = 1
+    val tickPause = 10
     
     val beatsInAMeasure = 4;
     var beatsPerMinute = 120.0
     
-    val quantizeBy = 4
+    val quantizeBy = 2
     
     val pads = PadRepository.loadPads
     val updaters = mutable.Buffer[Model => Unit]()
@@ -69,7 +69,7 @@ class Model {
       * Rounding
       */
     def quantize(beats: Double) = {
-        val multiplied = (beats * quantizeBy).toInt
+        val multiplied = (beats * quantizeBy).round
         val floored = multiplied.toDouble / quantizeBy.toDouble
         floored
     }
@@ -86,7 +86,7 @@ class Model {
     
     def addActivation(column: Int, row: Int) = {
         pads(column)(row).activateAtBeat(quantize(beatsIntoCurrentMeasure))
-        println(pads(row)(column), pads(row)(column).activateAt)
+        println(pads(row)(column), pads(row)(column).activations)
     }
     
     

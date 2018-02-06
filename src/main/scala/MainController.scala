@@ -78,12 +78,14 @@ class MainController(model: Model,
       * Update
       */
     def updatePads = model.forEachPad((column, row, pad) => {
-        pad.activateAt.map(beat => {
-            val highlighted = beat >= model.beatsIntoCurrentMeasure - 0.1 && beat < model.beatsIntoCurrentMeasure + 1
-            val padButton = padButtons(column)(row)
-            padButton.text = pad.sampleName
-            if (highlighted) padButton.getStyleClass().add("highlight")
-            else padButton.getStyleClass().removeAll("highlight")
+        pad.activations.map(a => a match {
+            case Activation(beat, lastPlayedMeasure) => {
+                val highlighted = beat >= model.beatsIntoCurrentMeasure - 0.1 && beat < model.beatsIntoCurrentMeasure + 1
+                val padButton = padButtons(column)(row)
+                padButton.text = pad.sampleName
+                if (highlighted) padButton.getStyleClass().add("highlight")
+                else padButton.getStyleClass().removeAll("highlight")
+            }
         })
     })
     
@@ -93,7 +95,7 @@ class MainController(model: Model,
       */
     def togglePlaying(e: ActionEvent) =
         model.togglePlaying
-
+    
     def toggleRecording(e: ActionEvent) =
         model.toggleRecording
     

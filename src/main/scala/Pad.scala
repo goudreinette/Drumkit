@@ -3,11 +3,11 @@ import java.io.File
 import kuusisto.tinysound.TinySound
 import org.apache.commons.io.{FileUtils, FilenameUtils}
 
-import scala.reflect.io.Path
 
+case class Activation(atBeat: Double, var lastPlayedMeasure: Int = 0)
 
 case class Pad(var samplePath: String) {
-    var activateAt: Option[Double] = None
+    var activations = Set[Activation]()
     var sample = TinySound.loadSound(new File(samplePath))
     
     var lastPlayedMeasure = 0
@@ -16,7 +16,7 @@ case class Pad(var samplePath: String) {
         FilenameUtils.getBaseName(samplePath)
     
     def activateAtBeat(beat: Double) =
-        activateAt = Some(beat)
+        activations += Activation(beat)
     
     def changeSample(f: File) = {
         sample = TinySound.loadSound(f)
@@ -24,16 +24,13 @@ case class Pad(var samplePath: String) {
     }
     
     def tryPlaying(currentWholeMeasure: Int, beatsIntoCurrentMeasure: Double) {
-        activateAt.map(beat => {
-            println(activateAt)
-            if (lastPlayedMeasure != currentWholeMeasure &&
-                beatsIntoCurrentMeasure >= beat) {
-                lastPlayedMeasure = currentWholeMeasure
+        for {a <- activations} {
+            if (a.lastPlayedMeasure != currentWholeMeasure && beatsIntoCurrentMeasure >= a.atBeat) {
+                
+                a.lastPlayedMeasure = currentWholeMeasure
                 sample.play
             }
-        })
+        }
     }
     
 }
-
-
