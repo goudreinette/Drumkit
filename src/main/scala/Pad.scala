@@ -24,6 +24,7 @@ case class Pad(var samplePath: String) {
         samplePath = f.getAbsolutePath
     }
 
+
     /**
       * Activations
       */

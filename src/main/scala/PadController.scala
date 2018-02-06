@@ -12,16 +12,21 @@ class PadController(model: Model, padsGrid: GridPane) {
     var padButtons = initializePads
 
 
-    model.onUpdate(model => {
-        updatePads
-    })
+    model.onUpdate(_ => updatePads)
 
 
     /**
       * Init
       */
     def initializePads = model.forEachPad((column, row, pad: Pad) => {
-        val padButton = new Button {
+        val padButton = makeButton(column, row, pad)
+        padsGrid.add(padButton, column, row)
+        padButton
+    })
+
+
+    def makeButton(column: Int, row: Int, pad: Pad) =
+        new Button {
             maxWidth = Double.MaxValue
             maxHeight = Double.MaxValue
             text = pad.sampleName
@@ -52,12 +57,6 @@ class PadController(model: Model, padsGrid: GridPane) {
                 }
             }
         }
-        padsGrid.add(padButton, column, row)
-
-        padButton
-    }
-
-    )
 
 
     /**
@@ -65,7 +64,8 @@ class PadController(model: Model, padsGrid: GridPane) {
       */
     def updatePads = model.forEachPad((column, row, pad) => {
         pad.activations.map({ case Activation(beat, _) => {
-            val highlighted = beat >= model.beatsIntoCurrentMeasure && beat < model.beatsIntoCurrentMeasure + 1
+            val beatsIntoCurrentMeasure = model.beatsIntoCurrentMeasure
+            val highlighted = beat <= beatsIntoCurrentMeasure + 0.2
             val padButton = padButtons(column)(row)
             padButton.text = pad.sampleName
             if (highlighted) padButton.getStyleClass().add("highlight")
@@ -73,5 +73,4 @@ class PadController(model: Model, padsGrid: GridPane) {
         }
         })
     })
-
 }

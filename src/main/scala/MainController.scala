@@ -19,8 +19,7 @@ class MainController(model: Model,
                      beatMeasureLabel: Label,
                      bpmLabel: Label,
                      bpmSlider: Slider,
-                     progress: ProgressBar,
-                    ) {
+                     progress: ProgressBar) {
 
     initializeSlider
 
