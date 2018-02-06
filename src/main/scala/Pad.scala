@@ -28,7 +28,7 @@ case class Pad(var samplePath: String) {
       * Activations
       */
     def activateAtBeat(beat: Double, currentWholeMeasure: Int) =
-        activations += Activation(beat, currentWholeMeasure)
+        activations += Activation(beat, lastPlayedMeasure = currentWholeMeasure)
 
 
     def removeActivations =

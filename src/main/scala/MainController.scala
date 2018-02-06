@@ -20,57 +20,14 @@ class MainController(model: Model,
                      bpmLabel: Label,
                      bpmSlider: Slider,
                      progress: ProgressBar,
-                     padsGrid: GridPane) {
+                    ) {
 
-    var padButtons = initializePads
     initializeSlider
-
-    model.onUpdate(model => {
-        secondsLabel.text = f"${model.totalSeconds}%2.2fs"
-        beatMeasureLabel.text = f"${model.beatsIntoCurrentMeasure}%2.2f ${model.currentWholeMeasure}"
-        bpmLabel.text = s"${model.beatsPerMinute.round}BPM"
-        play.selected = model.playing
-        progress.progress = (model.beatsIntoCurrentMeasure / model.beatsInAMeasure)
-
-        updatePads
-    })
 
 
     /**
       * Init
       */
-    def initializePads = model.forEachPad((column, row, pad: Pad) => {
-        val padButton = new Button {
-            maxWidth = Double.MaxValue
-            maxHeight = Double.MaxValue
-            text = pad.sampleName
-            onMousePressed = (_: Event) => {
-                if (model.recording)
-                    model.addActivation(column, row);
-                pad.sample.play()
-            }
-            onDragOver = (event: DragEvent) => {
-                val db = event.getDragboard
-                if (db.hasFiles) event.acceptTransferModes(TransferMode.Copy)
-                else event.consume
-            }
-            onDragDropped = (event: DragEvent) => {
-                val db = event.getDragboard
-                if (db.hasFiles) {
-                    val file = db.getFiles.get(0)
-                    pad.changeSample(file)
-                    println(pad)
-                }
-            }
-        }
-        padsGrid.add(padButton, column, row)
-
-        padButton
-    }
-
-    )
-
-
     def initializeSlider =
         bpmSlider.value = model.beatsPerMinute
 
@@ -78,17 +35,13 @@ class MainController(model: Model,
     /**
       * Update
       */
-    def updatePads = model.forEachPad((column, row, pad) => {
-        pad.activations.map({ case Activation(beat, _) => {
-            val highlighted = beat >= model.beatsIntoCurrentMeasure && beat < model.beatsIntoCurrentMeasure + 1
-            val padButton = padButtons(column)(row)
-            padButton.text = pad.sampleName
-            if (highlighted) padButton.getStyleClass().add("highlight")
-            else padButton.getStyleClass().removeAll("highlight")
-        }
-        })
+    model.onUpdate(model => {
+        secondsLabel.text = f"${model.totalSeconds}%2.2fs"
+        beatMeasureLabel.text = f"${model.beatsIntoCurrentMeasure}%2.2f ${model.currentWholeMeasure}"
+        bpmLabel.text = s"${model.beatsPerMinute.round}BPM"
+        play.selected = model.playing
+        progress.progress = (model.beatsIntoCurrentMeasure / model.beatsInAMeasure)
     })
-
 
     /**
       * Event handlers

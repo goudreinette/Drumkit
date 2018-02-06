@@ -38,7 +38,7 @@
                                 <ToggleButton fx:id="record" layoutX="72.0" mnemonicParsing="false"
                                               onAction="#toggleRecording" prefHeight="49.0" prefWidth="81.0"
                                               text="Record"/>
-                                <Button fx:id="clear" onAction="#clear" layoutX="151.0" mnemonicParsing="false"
+                                <Button fx:id="clear" layoutX="151.0" mnemonicParsing="false" onAction="#clear"
                                         prefHeight="49.0" prefWidth="62.0" text="Clear"/>
                             </children>
                         </Pane>
@@ -100,24 +100,6 @@
         </BorderPane>
     </top>
     <center>
-        <GridPane fx:id="padsGrid" gridLinesVisible="true" BorderPane.alignment="CENTER">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-            </rowConstraints>
-            <children>
-                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
-                        style="-fx-pref-height: 100%;" text="Button" GridPane.halignment="CENTER"
-                        GridPane.valignment="CENTER"/>
-            </children>
-        </GridPane>
+        <fx:include source="padsgrid.fxml"/>
     </center>
 </BorderPane>
