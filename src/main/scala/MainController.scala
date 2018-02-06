@@ -14,6 +14,7 @@ import scala.collection.JavaConversions._
 class MainController(model: Model,
                      play: ToggleButton,
                      record: ToggleButton,
+                     clear: Button,
                      secondsLabel: Label,
                      beatMeasureLabel: Label,
                      bpmLabel: Label,
@@ -98,6 +99,9 @@ class MainController(model: Model,
     
     def toggleRecording(e: ActionEvent) =
         model.toggleRecording
+    
+    def clear(e: ActionEvent) =
+        model.clear
     
     def bpmSliderChanged(e: Event) =
         model.beatsPerMinute = bpmSlider.getValue

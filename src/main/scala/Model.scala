@@ -68,7 +68,7 @@ class Model {
     /**
       * Rounding
       */
-    def quantize(beats: Double) = {
+    def quantize(beats: Double, quantizeBy: Int) = {
         val multiplied = (beats * quantizeBy).round
         val floored = multiplied.toDouble / quantizeBy.toDouble
         floored
@@ -85,9 +85,12 @@ class Model {
     
     
     def addActivation(column: Int, row: Int) = {
-        pads(column)(row).activateAtBeat(quantize(beatsIntoCurrentMeasure))
+        pads(column)(row).activateAtBeat(quantize(beatsIntoCurrentMeasure, quantizeBy))
         println(pads(row)(column), pads(row)(column).activations)
     }
+    
+    def clear =
+        forEachPad((_, _, pad: Pad) => pad.removeActivations)
     
     
     /**

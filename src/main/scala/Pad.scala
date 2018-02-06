@@ -12,21 +12,37 @@ case class Pad(var samplePath: String) {
     
     var lastPlayedMeasure = 0
     
+    /**
+      * Sample
+      */
     def sampleName =
         FilenameUtils.getBaseName(samplePath)
     
-    def activateAtBeat(beat: Double) =
-        activations += Activation(beat)
     
     def changeSample(f: File) = {
         sample = TinySound.loadSound(f)
         samplePath = f.getAbsolutePath
     }
     
+    /**
+      * Activations
+      */
+    def activateAtBeat(beat: Double) =
+        activations += Activation(beat)
+    
+    
+    def removeActivations =
+        activations = Set[Activation]()
+    
+    
+    /**
+      * Main
+      */
+    def reset = removeActivations
+    
     def tryPlaying(currentWholeMeasure: Int, beatsIntoCurrentMeasure: Double) {
         for {a <- activations} {
             if (a.lastPlayedMeasure != currentWholeMeasure && beatsIntoCurrentMeasure >= a.atBeat) {
-                
                 a.lastPlayedMeasure = currentWholeMeasure
                 sample.play
             }
