@@ -127,14 +127,12 @@ class Model {
     /**
       * Audio
       */
-    def playSounds = {
-        forEachPad((c, r, pad) => {
-            pad.tryPlaying(currentWholeMeasure, beatsIntoCurrentMeasure)
-        })
+    def playSounds =
+        forEachPad((c, r, pad) =>
+            pad.tryPlaying(currentWholeMeasure, beatsIntoCurrentMeasure))
 
-        //        if (lastPlayedWholeMeasure != currentWholeMeasure) {
-        //            lastPlayedWholeMeasure = currentWholeMeasure
-        //            Audio.cowbell.play
-        //        }
-    }
+    //        if (lastPlayedWholeMeasure != currentWholeMeasure) {
+    //            lastPlayedWholeMeasure = currentWholeMeasure
+    //            Audio.cowbell.play
+    //        }
 }

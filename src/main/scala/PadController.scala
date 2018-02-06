@@ -1,9 +1,10 @@
 import scalafx.event.Event
 import scalafx.scene.control.Button
-import scalafx.scene.input.{DragEvent, TransferMode}
+import scalafx.scene.input.{DragEvent, MouseButton, MouseEvent, TransferMode}
 import scalafx.scene.layout.GridPane
 import scalafxml.core.macros.sfxml
 import scalafx.Includes._
+import scalafx.scene.input
 
 
 @sfxml
@@ -24,10 +25,18 @@ class PadController(model: Model, padsGrid: GridPane) {
             maxWidth = Double.MaxValue
             maxHeight = Double.MaxValue
             text = pad.sampleName
-            onMousePressed = (_: Event) => {
-                if (model.recording)
-                    model.addActivation(column, row);
-                pad.sample.play()
+            onMousePressed = (e: MouseEvent) => {
+                e.button match {
+                    case MouseButton.Secondary => {
+                        pad.removeActivations
+                    }
+                    case _ => {
+                        if (model.recording)
+                            model.addActivation(column, row);
+                        pad.sample.play()
+                    }
+
+                }
             }
             onDragOver = (event: DragEvent) => {
                 val db = event.getDragboard
