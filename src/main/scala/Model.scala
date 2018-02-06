@@ -16,7 +16,7 @@ class Model {
     var nanos = 0.0
     val tickPause = 10
     
-    val beatsInAMeasure = 4;
+    val beatsInAMeasure = 8 // Dit is prima aan te passen blijkbaar
     var beatsPerMinute = 120.0
     
     val quantizeBy = 2
