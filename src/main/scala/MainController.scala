@@ -21,21 +21,21 @@ class MainController(model: Model,
                      bpmSlider: Slider,
                      progress: ProgressBar,
                      padsGrid: GridPane) {
-    
+
     var padButtons = initializePads
     initializeSlider
-    
+
     model.onUpdate(model => {
         secondsLabel.text = f"${model.totalSeconds}%2.2fs"
         beatMeasureLabel.text = f"${model.beatsIntoCurrentMeasure}%2.2f ${model.currentWholeMeasure}"
         bpmLabel.text = s"${model.beatsPerMinute.round}BPM"
         play.selected = model.playing
         progress.progress = (model.beatsIntoCurrentMeasure / model.beatsInAMeasure)
-        
+
         updatePads
     })
-    
-    
+
+
     /**
       * Init
       */
@@ -64,17 +64,17 @@ class MainController(model: Model,
             }
         }
         padsGrid.add(padButton, column, row)
-        
+
         padButton
     }
-    
+
     )
-    
-    
+
+
     def initializeSlider =
         bpmSlider.value = model.beatsPerMinute
-    
-    
+
+
     /**
       * Update
       */
@@ -86,25 +86,25 @@ class MainController(model: Model,
             if (highlighted) padButton.getStyleClass().add("highlight")
             else padButton.getStyleClass().removeAll("highlight")
         }
-                            })
+        })
     })
-    
-    
+
+
     /**
       * Event handlers
       */
     def togglePlaying(e: ActionEvent) =
         model.togglePlaying
-    
+
     def toggleRecording(e: ActionEvent) =
         model.toggleRecording
-    
+
     def clear(e: ActionEvent) =
         model.clear
-    
+
     def bpmSliderChanged(e: Event) =
         model.beatsPerMinute = bpmSlider.getValue
-    
+
     def sampleDropped(e: DragEvent) = {
         println(e.getDragboard.getString)
     }

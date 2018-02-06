@@ -75,7 +75,7 @@ class Model {
 
 
     def addActivation(column: Int, row: Int) = {
-        pads(column)(row).activateAtBeat(quantize(beatsIntoCurrentMeasure, quantizeBy))
+        pads(column)(row).activateAtBeat(quantize(beatsIntoCurrentMeasure, quantizeBy), currentWholeMeasure)
         println(pads(row)(column), pads(row)(column).activations)
     }
 
