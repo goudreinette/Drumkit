@@ -10,6 +10,7 @@ case class Activation(atBeat: Double, var lastPlayedMeasure: Int = 0)
 case class Pad(var samplePath: String) {
     var activations = Set[Activation]()
     var sample = TinySound.loadSound(new File(samplePath))
+    // Beads.makeSamplePlayer(samplePath)
     var muted = false
 
 
@@ -23,7 +24,7 @@ case class Pad(var samplePath: String) {
 
 
     def changeSample(f: File) = {
-        sample = TinySound.loadSound(f)
+        sample = TinySound.loadSound(f) //Beads.make
         samplePath = f.getAbsolutePath
     }
 
