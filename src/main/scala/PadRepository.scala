@@ -25,10 +25,4 @@ object PadRepository {
         kicks ++ snares
     }
 
-    def makeMetronome: Pad = {
-        val metronome = Pad("samples/snare.wav")
-        metronome.muted = true
-        metronome.activateAtBeat(0, -1) // HACK
-        metronome
-    }
 }

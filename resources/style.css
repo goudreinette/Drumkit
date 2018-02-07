@@ -8,6 +8,6 @@ Label {
 }
 
 .muted {
-    -fx-border-color: black;
-    -fx-border-width: 5px;
+    -fx-border-color: grey;
+    -fx-border-width: 3px;
 }

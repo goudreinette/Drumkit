@@ -29,7 +29,7 @@ class Model {
     val quantizeBy = 2
 
     val pads = PadRepository.loadPads
-    val metronome = PadRepository.makeMetronome
+    val metronome = new Metronome(beatsInAMeasure)
     val updaters = mutable.Buffer[Model => Unit]()
 
     var lastPlayedWholeBeat: Int = 0
@@ -98,7 +98,7 @@ class Model {
         case _ => mode = Recording
     }
 
-    def toggleMetronome = metronome.toggleMuted()
+    def toggleMetronome = metronome.toggleMuted
 
     def addActivation(column: Int, row: Int) = {
         pads(column)(row).activateAtBeat(quantize(beatsIntoCurrentMeasure, quantizeBy), currentWholeMeasure)
