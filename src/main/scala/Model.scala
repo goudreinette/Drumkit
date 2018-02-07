@@ -9,6 +9,7 @@ object Mode extends Enumeration {
 
 class Model {
 
+
     import Mode._
 
     /**
@@ -35,8 +36,9 @@ class Model {
     /**
       * Mode
       */
-    def recording = mode == Recording
-    def muting = mode == Muting
+    def isRecording = mode == Recording
+
+    def isMuting = mode == Muting
 
     /**
       * Total
@@ -78,6 +80,13 @@ class Model {
     /**
       * Actions
       */
+
+    def toggleMode(newMode: Mode.Value) =
+        if (newMode == mode)
+            mode = Normal
+        else
+            mode = newMode
+
     def togglePlaying =
         playing = !playing
 

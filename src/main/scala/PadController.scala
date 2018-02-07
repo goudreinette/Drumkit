@@ -1,11 +1,9 @@
-import scalafx.event.Event
+import scalafx.Includes._
 import scalafx.scene.control.Button
 import scalafx.scene.input.{DragEvent, MouseButton, MouseEvent, TransferMode}
 import scalafx.scene.layout.GridPane
 import scalafxml.core.macros.sfxml
-import scalafx.Includes._
-import scalafx.scene.input
-
+import Mode._
 
 @sfxml
 class PadController(model: Model, padsGrid: GridPane) {
@@ -36,9 +34,14 @@ class PadController(model: Model, padsGrid: GridPane) {
                         pad.removeActivations
                     }
                     case _ => {
-                        if (model.recording)
-                            model.addActivation(column, row);
-                        pad.play()
+                        model.mode match {
+                            case Muting => pad.toggleMuted()
+                            case Normal => pad.play()
+                            case Recording => {
+                                model.addActivation(column, row)
+                                pad.play()
+                            }
+                        }
                     }
 
                 }
@@ -68,14 +71,17 @@ class PadController(model: Model, padsGrid: GridPane) {
         if (pad.activations.isEmpty)
             removeHighlight(padButton)
 
-        pad.activations.map({ case Activation(beat, _) => {
-            val beatsIntoCurrentMeasure = model.beatsIntoCurrentMeasure
-            val highlighted = beat <= beatsIntoCurrentMeasure + 0.2
-            padButton.text = pad.sampleName
-            if (highlighted) addHighlight(padButton)
-            else removeHighlight(padButton)
+        def updateActivation = {
+            case Activation(beat, _) => {
+                val beatsIntoCurrentMeasure = model.beatsIntoCurrentMeasure
+                val highlighted = beat <= beatsIntoCurrentMeasure + 0.2
+                padButton.text = pad.sampleName
+                if (highlighted) addHighlight(padButton)
+                else removeHighlight(padButton)
+            }
         }
-        })
+        
+        pad.activations.foreach(_ updateActivation)
     })
 
     def addHighlight(padButton: Button) = padButton.getStyleClass().add("highlight")

@@ -1,19 +1,16 @@
-import scala.collection.mutable
-import scalafx.Includes._
-import scalafx.event
+import Mode._
+
 import scalafx.event.{ActionEvent, Event}
 import scalafx.scene.control._
-import scalafx.scene.input.{DragEvent, TransferMode}
-import scalafx.scene.layout.{Background, GridPane}
-import scalafx.scene.paint.Color._
+import scalafx.scene.input.DragEvent
 import scalafxml.core.macros.sfxml
-import scala.collection.JavaConversions._
 
 
 @sfxml
 class MainController(model: Model,
                      play: ToggleButton,
                      record: ToggleButton,
+                     mute: ToggleButton,
                      clear: Button,
                      secondsLabel: Label,
                      beatMeasureLabel: Label,
@@ -40,6 +37,9 @@ class MainController(model: Model,
         bpmLabel.text = s"${model.beatsPerMinute.round}BPM"
         play.selected = model.playing
         progress.progress = (model.beatsIntoCurrentMeasure / model.beatsInAMeasure)
+
+        record.selected = model.isRecording
+        mute.selected = model.isMuting
     })
 
     /**
@@ -49,7 +49,10 @@ class MainController(model: Model,
         model.togglePlaying
 
     def toggleRecording(e: ActionEvent) =
-        model.toggleRecording
+        model.toggleMode(Recording)
+
+    def toggleMuting(e: ActionEvent) =
+        model.toggleMode(Muting)
 
     def clear(e: ActionEvent) =
         model.clear
