@@ -2,15 +2,21 @@ import BeatUtils.quantize
 
 import scala.collection.mutable
 
+object Mode extends Enumeration {
+    val Recording, Muting, Normal = Value
+}
+
 
 class Model {
+
+    import Mode._
 
     /**
       * Fields
       */
     @volatile
     var playing = false
-    var recording = false
+    var mode: Mode.Value = Normal
 
     var nanos = 0.0
     val tickPause = 10
@@ -26,6 +32,9 @@ class Model {
     var lastPlayedWholeBeat: Int = 0
     var lastPlayedWholeMeasure: Int = 0
 
+    /**
+      * Mode
+      */
 
     /**
       * Total
@@ -70,8 +79,11 @@ class Model {
     def togglePlaying =
         playing = !playing
 
-    def toggleRecording =
-        recording = !recording
+
+    def toggleRecording = mode match {
+        case Recording => mode = Normal
+        case _ => mode = Recording
+    }
 
 
     def addActivation(column: Int, row: Int) = {
