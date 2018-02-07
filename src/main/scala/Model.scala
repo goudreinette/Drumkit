@@ -113,15 +113,14 @@ class Model {
         var lastTime = System.nanoTime()
         while (true) {
             if (playing) {
-                tick
                 val newTime = System.nanoTime()
                 nanos += (newTime - lastTime)
                 lastTime = newTime
-                //                println(nanos)
-                Thread.sleep(tickPause)
             } else {
                 lastTime = System.nanoTime()
             }
+            Thread.sleep(tickPause)
+            tick
         }
     }).start()
 
@@ -146,11 +145,6 @@ class Model {
         for {c <- 0 until 4} yield
             for {r <- 0 until 4} yield
                 f(c, r, pads(c)(r))
-
-    def eachPad: IndexedSeq[(Int, Int, Pad)] =
-        for {c <- 0 until 4
-             r <- 0 until 4} yield
-            (c, r, pads(c)(r))
 
     /**
       * Audio
