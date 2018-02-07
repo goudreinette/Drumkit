@@ -16,11 +16,11 @@ class PadController(model: Model, padsGrid: GridPane) {
     /**
       * Init
       */
-    def initializePads = model.forEachPad((column, row, pad: Pad) => {
+    def initializePads = model.forEachPad { (column, row, pad: Pad) =>
         val padButton = makeButton(column, row, pad)
         padsGrid.add(padButton, column, row)
         padButton
-    })
+    }
 
 
     def makeButton(column: Int, row: Int, pad: Pad) =
@@ -65,7 +65,7 @@ class PadController(model: Model, padsGrid: GridPane) {
     /**
       * Update
       */
-    def updatePads = model.forEachPad((column, row, pad) => {
+    def updatePads = model.forEachPad { (column, row, pad) =>
         val padButton = padButtons(column)(row)
 
         if (pad.activations.isEmpty)
@@ -79,9 +79,7 @@ class PadController(model: Model, padsGrid: GridPane) {
             toggleClass(padButton, highlighted, "highlighted")
         }
         }
-
-    })
-
+    }
 
     def toggleClass(padButton: Button, toggle: Boolean, classname: String) =
         if (toggle)

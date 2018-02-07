@@ -147,6 +147,11 @@ class Model {
             for {r <- 0 until 4} yield
                 f(c, r, pads(c)(r))
 
+    def eachPad: IndexedSeq[(Int, Int, Pad)] =
+        for {c <- 0 until 4
+             r <- 0 until 4} yield
+            (c, r, pads(c)(r))
+
     /**
       * Audio
       */
