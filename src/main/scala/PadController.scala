@@ -70,7 +70,7 @@ class PadController(model: Model, padsGrid: GridPane) {
 
         if (pad.activations.isEmpty)
             toggleClass(padButton, false, "highlighted")
-
+        toggleClass(padButton, pad.muted, "muted")
 
         pad.activations.foreach { case Activation(beat, _) => {
             val beatsIntoCurrentMeasure = model.beatsIntoCurrentMeasure

@@ -2,7 +2,12 @@ Label {
     -fx-text-fill: white !important;
 }
 
-.highlight {
+.highlighted {
     -fx-background-color: white;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+}
+
+.muted {
+    -fx-border-color: black;
+    -fx-border-width: 5px;
 }
