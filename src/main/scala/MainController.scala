@@ -31,7 +31,7 @@ class MainController(model: Model,
     /**
       * Update
       */
-    model.onUpdate(model => {
+    model.onUpdate { model =>
         secondsLabel.text = f"${model.totalSeconds}%2.2fs"
         beatMeasureLabel.text = f"${model.beatsIntoCurrentMeasure}%2.2f ${model.currentWholeMeasure}"
         bpmLabel.text = s"${model.beatsPerMinute.round}BPM"
@@ -40,7 +40,7 @@ class MainController(model: Model,
 
         record.selected = model.isRecording
         mute.selected = model.isMuting
-    })
+    }
 
     /**
       * Event handlers
