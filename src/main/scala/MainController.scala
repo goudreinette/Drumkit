@@ -1,7 +1,10 @@
+import java.io.File
+
 import Mode._
 
 import scalafx.event.{ActionEvent, Event}
 import scalafx.scene.control._
+import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.input.DragEvent
 import scalafxml.core.macros.sfxml
 
@@ -11,6 +14,7 @@ class MainController(model: Model,
                      play: ToggleButton,
                      record: ToggleButton,
                      mute: ToggleButton,
+                     metronome: ToggleButton,
                      clear: Button,
                      secondsLabel: Label,
                      beatMeasureLabel: Label,
@@ -19,7 +23,7 @@ class MainController(model: Model,
                      progress: ProgressBar) {
 
     initializeSlider
-
+    //    setGraphics
 
     /**
       * Init
@@ -27,6 +31,10 @@ class MainController(model: Model,
     def initializeSlider =
         bpmSlider.value = model.beatsPerMinute
 
+    //
+    //    def setGraphics =
+    //        for {button <- List(play, record, mute, metronome)}
+    //            button.setGraphic(new ImageView(s"@../../../resources/icons/${button.getId}.png"))
 
     /**
       * Update
@@ -40,10 +48,12 @@ class MainController(model: Model,
 
         record.selected = model.isRecording
         mute.selected = model.isMuting
+        metronome.selected = !model.metronome.muted
     }
 
     /**
       * Event handlers
+      * TODO: reduce duplication
       */
     def togglePlaying(e: ActionEvent) =
         model.togglePlaying
@@ -53,6 +63,9 @@ class MainController(model: Model,
 
     def toggleMuting(e: ActionEvent) =
         model.toggleMode(Muting)
+
+    def toggleMetronome(e: ActionEvent) =
+        model.toggleMetronome
 
     def clear(e: ActionEvent) =
         model.clear

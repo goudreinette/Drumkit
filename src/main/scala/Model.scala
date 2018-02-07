@@ -19,6 +19,7 @@ class Model {
     var playing = false
     var mode: Mode.Value = Normal
 
+
     var nanos = 0.0
     val tickPause = 10
 
@@ -28,6 +29,7 @@ class Model {
     val quantizeBy = 2
 
     val pads = PadRepository.loadPads
+    val metronome = PadRepository.makeMetronome
     val updaters = mutable.Buffer[Model => Unit]()
 
     var lastPlayedWholeBeat: Int = 0
@@ -96,6 +98,7 @@ class Model {
         case _ => mode = Recording
     }
 
+    def toggleMetronome = metronome.toggleMuted()
 
     def addActivation(column: Int, row: Int) = {
         pads(column)(row).activateAtBeat(quantize(beatsIntoCurrentMeasure, quantizeBy), currentWholeMeasure)
@@ -149,12 +152,11 @@ class Model {
     /**
       * Audio
       */
-    def playSounds =
-        forEachPad((c, r, pad) =>
-            pad.tryPlaying(currentWholeMeasure, beatsIntoCurrentMeasure))
+    def playSounds = {
+        forEachPad { (c, r, pad) =>
+            pad.tryPlaying(currentWholeMeasure, beatsIntoCurrentMeasure)
+        }
 
-    //        if (lastPlayedWholeMeasure != currentWholeMeasure) {
-    //            lastPlayedWholeMeasure = currentWholeMeasure
-    //            Audio.cowbell.play
-    //        }
+        metronome.tryPlaying(currentWholeMeasure, beatsIntoCurrentMeasure)
+    }
 }
