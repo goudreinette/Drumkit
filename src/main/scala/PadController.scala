@@ -69,22 +69,23 @@ class PadController(model: Model, padsGrid: GridPane) {
         val padButton = padButtons(column)(row)
 
         if (pad.activations.isEmpty)
-            removeHighlight(padButton)
+            toggleClass(padButton, false, "highlighted")
 
-        def updateActivation = {
-            case Activation(beat, _) => {
-                val beatsIntoCurrentMeasure = model.beatsIntoCurrentMeasure
-                val highlighted = beat <= beatsIntoCurrentMeasure + 0.2
-                padButton.text = pad.sampleName
-                if (highlighted) addHighlight(padButton)
-                else removeHighlight(padButton)
-            }
+
+        pad.activations.foreach { case Activation(beat, _) => {
+            val beatsIntoCurrentMeasure = model.beatsIntoCurrentMeasure
+            val highlighted = beat <= beatsIntoCurrentMeasure + 0.2
+            padButton.text = pad.sampleName
+            toggleClass(padButton, highlighted, "highlighted")
         }
-        
-        pad.activations.foreach(_ updateActivation)
+        }
+
     })
 
-    def addHighlight(padButton: Button) = padButton.getStyleClass().add("highlight")
 
-    def removeHighlight(padButton: Button) = padButton.getStyleClass().removeAll("highlight")
+    def toggleClass(padButton: Button, toggle: Boolean, classname: String) =
+        if (toggle)
+            padButton.getStyleClass().add(classname)
+        else
+            padButton.getStyleClass().removeAll(classname)
 }
