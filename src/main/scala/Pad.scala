@@ -1,17 +1,15 @@
 import java.io.File
 
 import kuusisto.tinysound.TinySound
-import net.beadsproject.beads.data.SampleManager
-import net.beadsproject.beads.ugens.SamplePlayer
-import org.apache.commons.io.{FileUtils, FilenameUtils}
-import net.beadsproject.beads.ugens.Gain
+import org.apache.commons.io.FilenameUtils
 
 
 case class Activation(atBeat: Double, var lastPlayedMeasure: Int = 0)
 
 case class Pad(var samplePath: String) {
     var activations = Set[Activation]()
-    var sample = Audio.makeSamplePlayer(samplePath)
+    var sample = TinySound.loadSound(new File(samplePath))
+
 
     var lastPlayedMeasure = 0
 
@@ -23,10 +21,9 @@ case class Pad(var samplePath: String) {
 
 
     def changeSample(f: File) = {
-        sample = new SamplePlayer(Audio.context, SampleManager.sample(f.getAbsolutePath))
+        sample = TinySound.loadSound(f)
         samplePath = f.getAbsolutePath
     }
-
 
     /**
       * Activations
@@ -54,7 +51,6 @@ case class Pad(var samplePath: String) {
     }
 
     def play() = {
-        sample.setToLoopStart()
-        sample.start()
+        sample.play()
     }
 }

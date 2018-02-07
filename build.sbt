@@ -19,8 +19,3 @@ libraryDependencies += "commons-io" % "commons-io" % "2.5"
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.4"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.4" % "test"
 
-//libraryDependencies += "com.github.samgwise" %% "beads" % "1.01-SNAPSHOT"
-
-
-
-

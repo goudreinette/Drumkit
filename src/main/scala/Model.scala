@@ -35,6 +35,8 @@ class Model {
     /**
       * Mode
       */
+    def recording = mode == Recording
+    def muting = mode == Muting
 
     /**
       * Total

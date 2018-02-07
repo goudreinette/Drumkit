@@ -38,8 +38,7 @@ class PadController(model: Model, padsGrid: GridPane) {
                     case _ => {
                         if (model.recording)
                             model.addActivation(column, row);
-                        pad.sample.setToLoopStart()
-                        pad.sample.start()
+                        pad.play()
                     }
 
                 }

@@ -8,7 +8,7 @@ import scala.reflect.runtime.universe._
 
 
 object Drumkit extends JFXApp {
-
+    TinySound.init
     val model = new Model
 
     stage = new JFXApp.PrimaryStage() {
@@ -23,6 +23,7 @@ object Drumkit extends JFXApp {
     model.run
 
     def exit {
+        TinySound.shutdown()
         PadRepository.save(model.pads)
         System.exit(0)
     }
