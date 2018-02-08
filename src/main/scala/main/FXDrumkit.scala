@@ -1,7 +1,7 @@
 package main
 
 import kuusisto.tinysound.TinySound
-import model.Model
+import model.{Model, PadRepository}
 
 import scala.reflect.runtime.universe._
 import scalafx.Includes._

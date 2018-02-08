@@ -3,7 +3,7 @@ package main
 import kuusisto.tinysound.TinySound
 import model.Model
 
-class PiDrumkit {
+object PiDrumkit {
     TinySound.init
     val model = new Model
 

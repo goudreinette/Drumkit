@@ -6,6 +6,7 @@ import scalafx.event.{ActionEvent, Event}
 import scalafx.scene.control._
 import scalafx.scene.input.DragEvent
 import scalafxml.core.macros.sfxml
+import model.Mode._
 
 
 @sfxml
