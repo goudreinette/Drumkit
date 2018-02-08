@@ -9,7 +9,7 @@ import scalafxml.core.macros.sfxml
 import model.Mode._
 
 import scalafx.scene.image.ImageView
-import model.PadRepository.resourceStringToURL
+import model.Implicits.resourceStringToURL
 
 @sfxml
 class MainController(model: Model,
