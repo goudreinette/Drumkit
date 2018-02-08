@@ -19,7 +19,7 @@ object FXDrumkit extends JFXApp {
         title = "Drumkit"
         onCloseRequest = _ => exit
         scene = new Scene(
-            FXMLView("main/layout.fxml",
+            FXMLView("src/main/layout.fxml",
                 new DependenciesByType(Map(
                     typeOf[Model] -> model))))
     }

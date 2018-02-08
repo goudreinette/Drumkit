@@ -34,7 +34,7 @@
                                         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true"
                                                    preserveRatio="true">
                                             <image>
-                                                <Image url="@../../resources/icons/metronome.png"/>
+                                                <Image url="@icons/metronome.png"/>
                                             </image>
                                         </ImageView>
                                     </graphic>
