@@ -16,3 +16,5 @@ lib/
 *.class
 project/target/
 .idea/
+samples.csv
+**/samples/

@@ -1,6 +1,5 @@
 package model
 
-import model.PadRepository.getClass
 import model.Implicits._
 
 class Metronome(beatsInAMeasure: Int) {
