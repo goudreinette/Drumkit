@@ -9,7 +9,7 @@ import scalafxml.core.macros.sfxml
 import model.Mode._
 
 import scalafx.scene.image.ImageView
-
+import model.PadRepository.resourceStringToURL
 
 @sfxml
 class MainController(model: Model,
@@ -34,8 +34,7 @@ class MainController(model: Model,
 
 
     def setGraphics = for {button <- List(play, record, mute, metronome, clear)} {
-        val path = getClass.getResource(s"../icons/${button.getId}.png").toString
-        val imageView = new ImageView(path) {
+        val imageView = new ImageView(s"icons/${button.getId}.png") {
             fitHeight = 18
             fitWidth = 18
         }
