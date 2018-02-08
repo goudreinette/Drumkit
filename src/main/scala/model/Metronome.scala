@@ -6,6 +6,7 @@ import model.Implicits._
 class Metronome(beatsInAMeasure: Int) {
     val measurePad = makeMeasureMetronome
     val beatPad = makeBeatMetronome
+    val pads = List(measurePad, beatPad)
 
 
     /**
@@ -36,14 +37,9 @@ class Metronome(beatsInAMeasure: Int) {
     /**
       * Actions
       */
-    def toggleMuted() = {
-        measurePad.toggleMuted()
-        beatPad.toggleMuted()
-    }
+    def toggleMuted() =
+        pads.foreach(_ toggleMuted())
 
-    def tryPlaying(currentWholeMeasure: Int, beatsIntoCurrentMeasure: Double) = {
-        measurePad.tryPlaying(currentWholeMeasure, beatsIntoCurrentMeasure)
-        beatPad.tryPlaying(currentWholeMeasure, beatsIntoCurrentMeasure)
-    }
-
+    def tryPlaying(currentWholeMeasure: Int, beatsIntoCurrentMeasure: Double) =
+        pads.foreach(_ tryPlaying(currentWholeMeasure, beatsIntoCurrentMeasure))
 }
