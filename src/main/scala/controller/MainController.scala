@@ -8,6 +8,8 @@ import scalafx.scene.input.DragEvent
 import scalafxml.core.macros.sfxml
 import model.Mode._
 
+import scalafx.scene.image.ImageView
+
 
 @sfxml
 class MainController(model: Model,
@@ -19,11 +21,10 @@ class MainController(model: Model,
                      secondsLabel: Label,
                      beatMeasureLabel: Label,
                      bpmLabel: Label,
-                     bpmSlider: Slider,
-                     progress: ProgressBar) {
+                     bpmSlider: Slider) {
 
     initializeSlider
-    //    setGraphics
+    setGraphics
 
     /**
       * Init
@@ -31,10 +32,15 @@ class MainController(model: Model,
     def initializeSlider =
         bpmSlider.value = model.beatsPerMinute
 
-    //
-    //    def setGraphics =
-    //        for {button <- List(play, record, mute, metronome)}
-    //            button.setGraphic(new ImageView(s"@../../../resources/icons/${button.getId}.png"))
+
+    def setGraphics = for {button <- List(play)} {
+        val path = getClass.getResource(s"../icons/${play.getId}.png").toString
+        val imageView = new ImageView(path) {
+            fitHeight = 18
+            fitWidth = 18
+        }
+        button.setGraphic(imageView)
+    }
 
     /**
       * Update
@@ -44,7 +50,6 @@ class MainController(model: Model,
         beatMeasureLabel.text = f"${model.beatsIntoCurrentMeasure}%2.2f ${model.currentWholeMeasure}"
         bpmLabel.text = s"${model.beatsPerMinute.round}BPM"
         play.selected = model.playing
-        progress.progress = (model.beatsIntoCurrentMeasure / model.beatsInAMeasure)
 
         record.selected = model.isRecording
         mute.selected = model.isMuting

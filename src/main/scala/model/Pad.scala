@@ -1,13 +1,15 @@
 package model
 
-import java.io.File
+import java.io.{File, InputStream}
+import java.net.URL
 
 import kuusisto.tinysound.TinySound
 import org.apache.commons.io.FilenameUtils
 
-case class Pad(var samplePath: String) {
+
+case class Pad(var sampleUrl: URL) {
     var activations = Set[Activation]()
-    var sample = TinySound.loadSound(samplePath)
+    var sample = TinySound.loadSound(sampleUrl)
     // Beads.makeSamplePlayer(samplePath)
     var muted = false
 
@@ -17,13 +19,12 @@ case class Pad(var samplePath: String) {
     /**
       * Sample
       */
-    def sampleName =
-        FilenameUtils.getBaseName(samplePath)
+    def sampleName = FilenameUtils.getBaseName(sampleUrl.getFile)
 
 
     def changeSample(f: File) = {
-        sample = TinySound.loadSound(f) //Beads.make
-        samplePath = f.getAbsolutePath
+        //        sample = TinySound.loadSound(f) //Beads.make
+        //        samplePath = f.getAbsolutePath
     }
 
     /**
