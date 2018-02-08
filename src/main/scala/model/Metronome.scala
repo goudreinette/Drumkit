@@ -12,8 +12,7 @@ class Metronome(beatsInAMeasure: Int) {
     /**
       * Getters
       */
-    def muted =
-        measurePad.muted && beatPad.muted
+    def muted = pads.forall(_ muted)
 
     /**
       * model.Pad constructors
