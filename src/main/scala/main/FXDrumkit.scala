@@ -5,6 +5,7 @@ import model.{Model, PadRepository}
 
 import scala.reflect.runtime.universe._
 import scalafx.Includes._
+import model.Implicits._
 import scalafx.application.JFXApp
 import scalafx.scene.Scene
 import scalafxml.core.{DependenciesByType, FXMLView}
@@ -18,7 +19,7 @@ object FXDrumkit extends JFXApp {
         title = "Drumkit"
         onCloseRequest = _ => exit
         scene = new Scene(
-            FXMLView(getClass.getResource("layout.fxml"),
+            FXMLView("main/layout.fxml",
                 new DependenciesByType(Map(
                     typeOf[Model] -> model))))
     }
