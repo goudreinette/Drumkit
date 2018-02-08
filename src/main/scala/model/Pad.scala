@@ -7,19 +7,20 @@ import kuusisto.tinysound.TinySound
 import org.apache.commons.io.FilenameUtils
 
 
-case class Pad(var sampleUrl: URL) {
-    var activations = Set[Activation]()
+case class Pad(var sampleUrl: URL,
+               var muted: Boolean = false,
+               var activations: Set[Activation] = Set[Activation]()) {
+
     var sample = TinySound.loadSound(sampleUrl)
-
-    assert(sample != null)
-
-    var muted = false
     var lastPlayedMeasure = 0
 
 
     /**
       * Sample
       */
+
+    assert(sample != null)
+
     def sampleName = FilenameUtils.getBaseName(sampleUrl.getFile)
 
     def changeSample(f: File) = {
