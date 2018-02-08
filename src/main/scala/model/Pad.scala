@@ -10,21 +10,21 @@ import org.apache.commons.io.FilenameUtils
 case class Pad(var sampleUrl: URL) {
     var activations = Set[Activation]()
     var sample = TinySound.loadSound(sampleUrl)
-    // Beads.makeSamplePlayer(samplePath)
+
+    assert(sample != null)
+
     var muted = false
-
-
     var lastPlayedMeasure = 0
+
 
     /**
       * Sample
       */
     def sampleName = FilenameUtils.getBaseName(sampleUrl.getFile)
 
-
     def changeSample(f: File) = {
-        //        sample = TinySound.loadSound(f) //Beads.make
-        //        samplePath = f.getAbsolutePath
+        sample = TinySound.loadSound(f) //Beads.make
+        sampleUrl = f.toURL
     }
 
     /**
@@ -32,7 +32,6 @@ case class Pad(var sampleUrl: URL) {
       */
     def activateAtBeat(beat: Double, currentWholeMeasure: Int) =
         activations += Activation(beat, lastPlayedMeasure = currentWholeMeasure)
-
 
     def removeActivations =
         activations = Set[Activation]()
