@@ -7,7 +7,7 @@ import org.apache.commons.io.FilenameUtils
 
 case class Pad(var samplePath: String) {
     var activations = Set[Activation]()
-    var sample = TinySound.loadSound(new File(samplePath))
+    var sample = TinySound.loadSound(samplePath)
     // Beads.makeSamplePlayer(samplePath)
     var muted = false
 
