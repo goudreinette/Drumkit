@@ -1,3 +1,5 @@
+package model
+
 object BeatUtils {
     /**
       * Rounds up or down to the nearest beat-part

@@ -1,11 +1,9 @@
+package model
+
 import java.io.File
 
 import kuusisto.tinysound.TinySound
 import org.apache.commons.io.FilenameUtils
-
-
-case class Activation(atBeat: Double, var lastPlayedMeasure: Int = 0)
-
 
 case class Pad(var samplePath: String) {
     var activations = Set[Activation]()

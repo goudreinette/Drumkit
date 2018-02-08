@@ -1,9 +1,12 @@
+package controller
+
+import model.Model
+
 import scalafx.Includes._
 import scalafx.scene.control.Button
 import scalafx.scene.input.{DragEvent, MouseButton, MouseEvent, TransferMode}
 import scalafx.scene.layout.GridPane
 import scalafxml.core.macros.sfxml
-import Mode._
 
 @sfxml
 class PadController(model: Model, padsGrid: GridPane) {

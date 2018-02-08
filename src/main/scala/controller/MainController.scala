@@ -1,10 +1,9 @@
-import java.io.File
+package controller
 
-import Mode._
+import model.Model
 
 import scalafx.event.{ActionEvent, Event}
 import scalafx.scene.control._
-import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.input.DragEvent
 import scalafxml.core.macros.sfxml
 

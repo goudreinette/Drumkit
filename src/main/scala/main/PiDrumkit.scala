@@ -1,4 +1,7 @@
+package main
+
 import kuusisto.tinysound.TinySound
+import model.Model
 
 class PiDrumkit {
     TinySound.init

@@ -1,10 +1,13 @@
-import kuusisto.tinysound.TinySound
+package main
 
+import kuusisto.tinysound.TinySound
+import model.Model
+
+import scala.reflect.runtime.universe._
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.scene.Scene
 import scalafxml.core.{DependenciesByType, FXMLView}
-import scala.reflect.runtime.universe._
 
 
 object FXDrumkit extends JFXApp {
@@ -15,7 +18,7 @@ object FXDrumkit extends JFXApp {
         title = "Drumkit"
         onCloseRequest = _ => exit
         scene = new Scene(
-            FXMLView(getClass.getResource("layout.fxml"),
+            FXMLView(getClass.getResource("view/layout.fxml"),
                 new DependenciesByType(Map(
                     typeOf[Model] -> model))))
     }

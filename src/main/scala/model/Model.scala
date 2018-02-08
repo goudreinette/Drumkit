@@ -1,4 +1,6 @@
-import BeatUtils.quantize
+package model
+
+import model.BeatUtils.quantize
 
 import scala.collection.mutable
 

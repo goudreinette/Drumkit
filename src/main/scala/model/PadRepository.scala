@@ -1,3 +1,5 @@
+package model
+
 import java.io.File
 
 import com.github.tototoshi.csv.{CSVReader, CSVWriter}

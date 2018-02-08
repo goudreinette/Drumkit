@@ -1,6 +1,6 @@
 import org.scalatest.FunSuite
 
-import BeatUtils._
+import model.BeatUtils._
 
 class Tests extends FunSuite {
     val quantizations = Map(

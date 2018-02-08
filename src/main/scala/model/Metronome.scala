@@ -1,3 +1,5 @@
+package model
+
 class Metronome(beatsInAMeasure: Int) {
     val measurePad = makeMeasureMetronome
     val beatPad = makeBeatMetronome
@@ -10,7 +12,7 @@ class Metronome(beatsInAMeasure: Int) {
         measurePad.muted && beatPad.muted
 
     /**
-      * Pad constructors
+      * model.Pad constructors
       */
 
     def makeMeasureMetronome: Pad = {
