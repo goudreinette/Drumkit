@@ -7,7 +7,7 @@ import scalafxml.core.{DependenciesByType, FXMLView}
 import scala.reflect.runtime.universe._
 
 
-object Drumkit extends JFXApp {
+object FXDrumkit extends JFXApp {
     TinySound.init
     val model = new Model
 

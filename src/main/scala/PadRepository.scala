@@ -20,8 +20,8 @@ object PadRepository {
             defaultPads
 
     def defaultPads: Pads = {
-        val kicks = for {c <- 0 until 2} yield for {r <- 0 until 4} yield Pad("samples/kick.wav")
-        val snares = for {c <- 2 until 4} yield for {r <- 0 until 4} yield Pad("samples/snare.wav")
+        val kicks = for {c <- 0 until 2} yield for {r <- 0 until 4} yield Pad("resources/samples/kick.wav")
+        val snares = for {c <- 2 until 4} yield for {r <- 0 until 4} yield Pad("resources/samples/snare.wav")
         kicks ++ snares
     }
 
