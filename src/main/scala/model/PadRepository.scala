@@ -14,7 +14,7 @@ object PadRepository {
     val file = new File("samples.csv")
 
     implicit def resourceStringToURL(path: String): URL =
-        getClass.getResource(s"../${path}")
+        ClassLoader.getSystemResource(s"${path}")
 
 
     def save(pads: Pads) = {
@@ -32,7 +32,7 @@ object PadRepository {
 
     def defaultPads: Pads = {
         val kicks = for {c <- 0 until 2} yield for {r <- 0 until 4} yield Pad("samples/kick.wav")
-        val snares = for {c <- 2 until 4} yield for {r <- 0 until 4} yield Pad("/samples/kick.wav")
+        val snares = for {c <- 2 until 4} yield for {r <- 0 until 4} yield Pad("samples/snare.wav")
         kicks ++ snares
     }
 

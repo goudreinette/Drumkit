@@ -33,8 +33,8 @@ class MainController(model: Model,
         bpmSlider.value = model.beatsPerMinute
 
 
-    def setGraphics = for {button <- List(play)} {
-        val path = getClass.getResource(s"../icons/${play.getId}.png").toString
+    def setGraphics = for {button <- List(play, record, mute, metronome, clear)} {
+        val path = getClass.getResource(s"../icons/${button.getId}.png").toString
         val imageView = new ImageView(path) {
             fitHeight = 18
             fitWidth = 18
