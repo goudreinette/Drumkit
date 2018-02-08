@@ -6,7 +6,6 @@ import java.net.URL
 import com.github.tototoshi.csv.{CSVReader, CSVWriter}
 import model.Implicits.resourceStringToURL
 
-import scala.languageFeature.implicitConversions
 
 object PadRepository {
     type Pads = Seq[Seq[Pad]]
